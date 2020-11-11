@@ -1,4 +1,4 @@
-# vueteste
+# vue-template
 
 ## Project setup
 ```
