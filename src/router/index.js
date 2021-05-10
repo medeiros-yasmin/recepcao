@@ -4,6 +4,14 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import NotFound from '../views/erros/NotFound.vue'
 import Home from '../views/Home.vue'
+import Recepcao from '../views/Recepcao.vue'
+import Inicio from '../views/Inicio.vue'
+import CadastrarVisita from '../views/CadastrarVisita.vue'
+import Visualizar from '../views/Visualizar.vue'
+import CadastrarUsuario from '../views/CadastrarUsuario.vue'
+
+import store from '@/store'
+
 
 Vue.use(VueRouter)
 
@@ -11,7 +19,10 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Login
+    component: Login,
+    meta: {
+      publica: true
+    }
   },
   {
     path: '/about',
@@ -22,28 +33,75 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path:'/home',
+    path: '/home',
+    hame: 'home',
     component: Home
   },
   {
-    path:'/login',
+    path: '/inicio',
+    name: 'inicio',
+    component: Inicio,
+  },
+  {
+    path: '/recepcao',
+    name: 'recepcao',
+    component: Recepcao
+  },
+  {
+    path: '/login',
+    name: 'login',
     component: Login
   },
   {
-    path:'/notfound',
+    path: '/notfound',
+    name: 'notfound',
     component: NotFound
   },
   {
-    path:'*',
-    redirect:'/notfound'
+    path: '/cadastrarVisita',
+    name: 'cadastrar.visita',
+    component: CadastrarVisita
+  },
+  {
+    path: '/visualizar',
+    name: 'visualizar',
+    component: Visualizar
+  },
+  {
+    path: '/cadastrarUsuario',
+    name: 'cadastrar.usuario',
+    component: CadastrarUsuario
+  },
+
+  {
+    path: '*',
+    name: 'notFound',
+    redirect: '/notfound'
   }
 
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  //mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
+
+
+
+router.beforeEach((routeTo, routeFrom, next) => {
+
+
+  if (!routeTo.meta.publica && !store.state.token) {
+
+    return next({ path: '/login' });
+
+  } else {
+    next();
+
+  }
+}
+
+);
 
 export default router

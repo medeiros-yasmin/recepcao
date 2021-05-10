@@ -1,4 +1,3 @@
-
 <template>
   <app-layout style="padding-top: 0px">
     <div slot="conteudo">
@@ -32,14 +31,14 @@
               offset-y
               min-width="290px"
             >
-              <template >
+              <template v-slot:activator="{ on, attrs }">
                 <v-text-field
                   :value="filtro.dataCirculacaoInicio | moment('DD/MM/YYYY')"
                   label="Hora Entrada"
                   prepend-icon="mdi-calendar"
                   hint="DD/MM/YYYY  format"
                   readonly
-                  
+                  v-bind="attrs"
                   v-on="on"
                 ></v-text-field>
               </template>
@@ -73,14 +72,14 @@
               offset-y
               min-width="290px"
             >
-              <template>
+              <template v-slot:activator="{ on, attrs }">
                 <v-text-field
                   :value="filtro.dataCirculacaoFim | moment('DD/MM/YYYY')"
                   label="Hora Saída"
                   prepend-icon="mdi-calendar"
                   hint="DD/MM/YYYY  format"
                   readonly
-                  
+                  v-bind="attrs"
                   v-on="on"
                 ></v-text-field>
               </template>
@@ -124,56 +123,26 @@
               <th class="text-left">Hora Saída</th>
               <th class="text-left">Setor Visitado</th>
               <th class="text-left">Objetos Pessoais</th>
-               <th class="text-left">Observações</th>
-               <th class="text-left">Comandos</th>
+              <th class="text-left">Observações</th>
+              <th class="text-left">Comandos</th>
             </tr>
           </thead>
           <tbody>
-           
-            <tr v-for="item in page.content" :key="item.id">
-            <!--   <td>{{ item.id}}</td>
-              <td>{{ item.data }}</td>
-              <td>{{ item.dataCirculacao}}</td>
-              <td>{{ item.dataFechamento }}</td>
-              <td>
-                <v-btn   text color="primary" @click="edit(item.id)" style="margin:2px">
-                  <v-icon>far fa-edit</v-icon>
-                </v-btn>
-
-                <ModalConfirm
-                  titulo="Alerta"
-                  @onYes="updateYes"
-                  :mensagem="
-                    'Deseja excluir o diario do dia ' +
-                    formatDate(item.dataCirculacao) +
-                    ' ?'
-                  "
-                  :url="'diario/' + item.diarioId"
-                  icon="fa-trash-alt"
-                >
-                </ModalConfirm>
-              </td> -->
-            </tr> 
+            <tr v-for="item in page.content" :key="item.id"></tr>
           </tbody>
 
-              <tfoot>
-           
-          </tfoot>
+          <tfoot></tfoot>
         </template>
       </v-simple-table>
-       <div class="text-center">
-              <v-pagination value="1"    
-              length="2"  >                
-              </v-pagination>
-            </div>
-
+      <div class="text-center">
+        <v-pagination value="1" length="2"> </v-pagination>
+      </div>
     </div>
   </app-layout>
 </template>
 
+
 <script>
-
-
 export default {
   data: () => {
     return {
@@ -196,44 +165,6 @@ export default {
       menu5: false,
     };
   },
-  components: {  },
-  methods: {
-    updateSave() {
-      //this.diario.diarioId = ev.diario.diarioId;
-      //this.dialog = ev.dialog;
-      
-    },
-    cancelar() {
-      //this.dialog = ev;
-      
-    },
-    updateYes() {
-      //alert("Sim");
-      
-    },
-
-    edit() {
-      //this.$router.push("/diario/" + id);
-      
-    },
-
-    atualizarPagina(){
-      
-      /* let url  = '/diarios?page='+(ev - 1)+'&size=10';
-      console.log(url)
-      this.$http.get(url).then(res=>{
-       this.page = res.data
-    }) */
-    },
-  },
-  mounted(){
-    /* this.$http.get('/diarios').then(res=>{
-     this.page = res.data;
-    }); */
-
-  }
+  components: {},
 };
 </script>
-
-<style>
-</style>

@@ -15,7 +15,7 @@
             <div>
               Desculpe, a página que você tentou acessar não foi encontrada ou
               não existe. Verifique se a URL está correta ou entre em contato
-              com a gente se precisar de ajuda.
+              conosco se precisar de ajuda.
               <br /><br />
               <v-btn text color="primary">Voltar para a Home</v-btn>
             </div>
